@@ -42,3 +42,21 @@ attr("height", 8).
 attr("x", function (d) {return x(d[0]);}).
 attr("width", function (d) {return x(d[1]) - x(d[0]);}).
 attr("fill", function (d) {return color(d[0]);});
+
+g.append("text").
+attr("class", "caption").
+attr("x", x.range()[0]).
+attr("y", -6).
+attr("fill", "#000").
+attr("text-anchor", "start").
+attr("font-weight", "bold");
+
+g.call(d3.axisBottom(x).
+tickSize(13).
+tickFormat(function (x) {return Math.round(x) + '%';}).
+tickValues(color.domain())).
+select(".domain").
+remove();
+
+const EDUCATION_FILE = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json';
+const COUNTY_FILE = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json';
