@@ -41,3 +41,11 @@ div.tooltip {
 #description {
   text-align: center;
 }
+#source {
+  align-self: flex-end;
+  margin-top: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
