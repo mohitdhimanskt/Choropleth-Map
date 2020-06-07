@@ -60,3 +60,24 @@ remove();
 
 const EDUCATION_FILE = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json';
 const COUNTY_FILE = 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json';
+d3.queue().
+defer(d3.json, COUNTY_FILE).
+defer(d3.json, EDUCATION_FILE).
+await(ready);
+
+function ready(error, us, education) {
+  if (error) throw error;
+
+  svg.append("g").
+  attr("class", "counties").
+  selectAll("path").
+  data(topojson.feature(us, us.objects.counties).features).
+  enter().append("path").
+  attr("class", "county").
+  attr("data-fips", function (d) {
+    return d.id;
+  }).
+  attr("data-education", function (d) {
+    var result = education.filter(function (obj) {
+      return obj.fips == d.id;
+    });
