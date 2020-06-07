@@ -105,3 +105,30 @@ function ready(error, us, education) {
         var result = education.filter(function (obj) {
           return obj.fips == d.id;
         });
+        if (result[0]) {
+            return result[0]['area_name'] + ', ' + result[0]['state'] + ': ' + result[0].bachelorsOrHigher + '%';
+          }
+       
+          return 0;
+        }).
+        attr("data-education", function () {
+          var result = education.filter(function (obj) {
+            return obj.fips == d.id;
+          });
+          if (result[0]) {
+            return result[0].bachelorsOrHigher;
+          }
+        
+          return 0;
+        }).
+        style("left", d3.event.pageX + 10 + "px").
+        style("top", d3.event.pageY - 28 + "px");}).
+      on("mouseout", function (d) {
+        tooltip.style("opacity", 0);
+      });
+    
+      svg.append("path").
+      datum(topojson.mesh(us, us.objects.states, function (a, b) {return a !== b;})).
+      attr("class", "states").
+      attr("d", path);
+    }
