@@ -37,3 +37,8 @@ data(color.range().map(function (d) {
   if (d[1] == null) d[1] = x.domain()[1];
   return d;
 })).
+enter().append("rect").
+attr("height", 8).
+attr("x", function (d) {return x(d[0]);}).
+attr("width", function (d) {return x(d[1]) - x(d[0]);}).
+attr("fill", function (d) {return color(d[0]);});
