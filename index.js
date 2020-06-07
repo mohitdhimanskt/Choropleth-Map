@@ -81,3 +81,27 @@ function ready(error, us, education) {
     var result = education.filter(function (obj) {
       return obj.fips == d.id;
     });
+    if (result[0]) {
+        return result[0].bachelorsOrHigher;
+      }
+      
+      console.log('could find data for: ', d.id);
+      return 0;
+    }).
+    attr("fill", function (d) {
+      var result = education.filter(function (obj) {
+        return obj.fips == d.id;
+      });
+      if (result[0]) {
+        return color(result[0].bachelorsOrHigher);
+      }
+
+      return color(0);
+    }).
+    attr("d", path).
+    on("mouseover", function (d) {
+      tooltip.style("opacity", .9);
+      tooltip.html(function () {
+        var result = education.filter(function (obj) {
+          return obj.fips == d.id;
+        });
