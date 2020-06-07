@@ -38,3 +38,6 @@ div.tooltip {
 #title {
   font-size: 3.5rem;
 }
+#description {
+  text-align: center;
+}
